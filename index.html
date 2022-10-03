@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        button {
+            border: white 2px solid;
+            background-color: black;
+            padding: 20px;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .heading {
+            margin-top: 200px;
+        }
+
+        button:hover {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="heading">Stop watch</h1>
+    <h1><span class="minit">minit</span>
+        <span>:</span>
+        <span class="second">second</span>
+    </h1>
+    <h1>
+        <button onclick="start()">Start</button>
+        <button onclick="stop()">Stop</button>
+        <button onclick="reset()">Reset</button>
+        <button onclick="Restart()">Restart</button>
+    </h1>
+    <script>
+        minit = document.getElementsByClassName("minit")[0];
+        second = document.getElementsByClassName("second")[0];
+
+        minit.innerHTML = "00";
+        second.innerHTML = "00";
+
+        // console.log(typeof (minit.innerHTML))
+
+        function start() {
+            intervel = setInterval(function () {
+                if (second.innerHTML == "59") {
+                    if (parseInt(minit.innerHTML) < 9) {
+                        minit.innerHTML = "0" + (parseInt(minit.innerHTML) + 1).toString();
+                    }
+                    else {
+                        minit.innerHTML = (parseInt(minit.innerHTML) + 1).toString();
+                    }
+                    second.innerHTML = '00';
+                }
+                else {
+                    if (parseInt(second.innerHTML) < 10) {
+                        second.innerHTML = "0" + (parseInt(second.innerHTML) + 1).toString();
+                    }
+                    else {
+                        second.innerHTML = (parseInt(second.innerHTML) + 1).toString();
+                    }
+                }
+            }, 10);
+        }
+
+        function stop() {
+            clearInterval(intervel);
+        }
+
+        function reset() {
+            clearInterval(intervel);
+            minit.innerHTML = "00";
+            second.innerHTML = "00";
+        }
+
+        function Restart() {
+            clearInterval(intervel);
+            minit.innerHTML = "00";
+            second.innerHTML = "00";
+            start();
+        }
+    </script>
+</body>
+
+</html>
